@@ -1,3 +1,5 @@
+//C program to create a polynomial and attach terms using structures, combining like terms with the same exponent.
+
 #include<stdio.h>
 typedef struct{
     int coeff,exp;
@@ -17,8 +19,8 @@ POLY attachPoly(POLY pol,TERM t){
     p1.p[p1.n]=t;
     p1.n=p1.n+1;
 
-    for(int i=0;i<=p1.n;i++){
-        for(int j=i+1;j<=p1.n;j++)
+    for(int i=0;i<p1.n;i++){
+        for(int j=i+1;j<p1.n;j++)
             if(p1.p[i].exp==p1.p[j].exp)
             {
                  p1.p[i].coeff+=p1.p[j].coeff;

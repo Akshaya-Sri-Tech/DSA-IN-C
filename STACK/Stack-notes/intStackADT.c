@@ -2,7 +2,7 @@
 #define MAX_SIZE 10
 
 typedef struct{
-    char val[MAX_SIZE];
+    int val[MAX_SIZE];
     int top;
 }STACK;
 typedef enum{ FALSE,TRUE }BOOL;
@@ -10,8 +10,8 @@ typedef enum{ FALSE,TRUE }BOOL;
 STACK createStack();
 BOOL isEmpty(STACK s);
 BOOL isFull(STACK s);
-BOOL push(STACK *s,char v);
-BOOL pop(STACK *s,char *v);
+BOOL push(STACK *s,int v);
+BOOL pop(STACK *s,int *v);
 void display(STACK s);
 
 // STACK IMPLEMENTATIONS IN C
@@ -32,14 +32,14 @@ BOOL isFull(STACK s){
     return FALSE;
 }
 
-BOOL push(STACK *s,char v){
+BOOL push(STACK *s,int v){
     if(isFull(*s)) return FALSE;
     s->top+=1;
     s->val[s->top]=v;
     return TRUE;
 }
 
-BOOL pop(STACK *s,char *v){
+BOOL pop(STACK *s,int *v){
     if(isEmpty(*s)) return FALSE;
     *v=s->val[s->top];
     (s->top)-=1;
@@ -48,7 +48,7 @@ BOOL pop(STACK *s,char *v){
 
 void display(STACK s){
 while(!isEmpty(s)){
-        char x;
+        int x;
         pop(&s,&x);
         printf("%c ",x);
     }

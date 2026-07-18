@@ -50,6 +50,6 @@ void display(STACK s){
 while(!isEmpty(s)){
         int x;
         pop(&s,&x);
-        printf("%c ",x);
+        printf("%d ",x);
     }
 }

@@ -1,15 +1,15 @@
-//check whether the given string is of the form , (w.w-reverse) eg:abc.cba
-//Edge Cases : abc. , abc , abc.cb , abc.cbad , abc.ca , .  
+//Check whether a given string follows the pattern w · reverse(w) · w
+//abc.cba.abc, a.a.a, abc.cba.cba, abc.abc.abc, abc.cba, abc.cba., abc..abc, .cba.abc, abc.cba., abc, ., abc., empty input
 
 #include<stdio.h>
-#include<string.h>
 #define MAX_SIZE 10
 
 typedef struct{
-    char val[MAX_SIZE];
+    int val[MAX_SIZE];
     int top;
 }STACK;
 typedef enum{ FALSE,TRUE }BOOL;
+
 STACK createStack();
 BOOL isEmpty(STACK s);
 BOOL isFull(STACK s);
@@ -17,16 +17,16 @@ BOOL push(STACK *s,char v);
 BOOL pop(STACK *s,char *v);
 void display(STACK s);
 
-//main()
 int main(){
-    STACK s1;
+    STACK s1,s2;
     s1=createStack();
+    s2=createStack();
     char str[100];
     printf("Enter the sequence : ");
     fgets(str, sizeof(str), stdin);
 
-    int i=0;
     int check=1;
+    int i=0;
     while(str[i]!='\0'){
         if(str[i]=='.') break;
         push(&s1,str[i]);
@@ -35,6 +35,7 @@ int main(){
     i++;
 
     while(str[i]!='\0'){
+        if(str[i]=='.') break;
         if(str[i]=='\n'){ // for edge case : abc.   
         int j=i-1;
         if(str[j]=='.') check=0; 
@@ -45,21 +46,40 @@ int main(){
             check=0; break;
         };
         if(x!=str[i]) check=0;
+        push(&s2,str[i]);
         i++;
     }
-    if(!isEmpty(s1)) check=0;
+    i++;
+
+    if(isEmpty(s1)){
+        while(str[i]!='\0'){
+            if(str[i]=='\n'){ // for edge case : abc.   
+            int j=i-1;
+            if(str[j]=='.') check=0; 
+            break;
+            }
+            char x;
+            if(!pop(&s2,&x)){
+                check=0; break;
+            };
+            if(x!=str[i]) check=0;
+            i++;
+        }
+    }
+    else{ check=0;}
+    if(!isEmpty(s2)) check=0;
     if(check)
-        printf("YES, It is in (w.w-reverse) form\n");
+        printf("YES, It is in (w.w-reverse.w) form\n");
     else
-        printf("NO, It is not in (w.w-reverse) form\n");
+        printf("NO, It is not in (w.w-reverse.w) form\n");
     return 0;
 
 }
 
-//STACK IMPLEMENTATION IN C
+// STACK IMPLEMENTATIONS IN C
+
 STACK createStack(){
     STACK s;
-    s.val[0]='\0';
     s.top=0;
     return s;
 }
@@ -95,4 +115,3 @@ while(!isEmpty(s)){
         printf("%c ",x);
     }
 }
-

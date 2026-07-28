@@ -24,6 +24,7 @@ BOOL isBalanced(char s[]){
         if(s[i]>='A' && s[i]<='Z')
             push(&s1,s[i]);
         if(s[i]>='a' && s[i]<='z'){
+            if(isEmpty(s1)) return FALSE;
             char x;
             pop(&s1,&x);
             if(x!=s[i]-32) return FALSE;

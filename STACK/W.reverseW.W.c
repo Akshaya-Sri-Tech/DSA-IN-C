@@ -5,7 +5,7 @@
 #define MAX_SIZE 10
 
 typedef struct{
-    int val[MAX_SIZE];
+    char val[MAX_SIZE];
     int top;
 }STACK;
 typedef enum{ FALSE,TRUE }BOOL;

@@ -4,7 +4,7 @@
 #include<stdio.h>
 #define MAX 10
 typedef enum{ FALSE,TRUE}BOOL;
-typedef struct{ int val[MAX]; int rear,front; }QUEUE;
+typedef struct{ char val[MAX]; int rear,front; }QUEUE;
 void createQueue(QUEUE *q);
 BOOL isEmpty(QUEUE q);
 BOOL isFull(QUEUE q);

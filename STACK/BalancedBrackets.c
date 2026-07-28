@@ -16,38 +16,32 @@ BOOL push(STACK *s,char v);
 BOOL pop(STACK *s,char *v);
 void display(STACK s);
 
-BOOL isBalanced(STACK s){
-    int n=0;
-    while(!isEmpty(s)){
-    char x;
-    pop(&s,&x);
-    if(x==')') n++;
-    if(x=='(') n--;
-    if(n<0) return FALSE;
+BOOL isBalanced(char str[]){
+    STACK s1;
+    s1=createStack();
+    int i=0; char x;
+    while(str[i]!='\0'){
+    if(str[i]=='(') push(&s1,str[i]);
+    if(str[i]==')'){
+        if(isEmpty(s1)) return FALSE;
+        pop(&s1,&x);
     }
-    if(n!=0) return FALSE;
+    i++;
+    }
+    if(!isEmpty(s1)) return FALSE;
     return TRUE;
 }
 
-int main(){
-
-    STACK s1;
-    s1=createStack();
+int main()
+{
     char str[100];
     printf("Enter the bracket sequence : ");
     fgets(str,sizeof(str),stdin); // fgets used instead of scanf to handle when the edge case "enter" is given 
-    printf("Given bracket sequence : %s\n",str);
 
-    int i=0;
-    while(str[i]!='\0'){
-        push(&s1,str[i]);
-        i++;
-    }
-
-    BOOL b=isBalanced(s1);
-    if(b){ printf("Yes it is balanced\n");}
+    BOOL b=isBalanced(str);
+    if(b){ printf("YES it is balanced\n");}
     else
-        printf("no not balnced\n");
+        printf("NO It is not balnced\n");
 
 }
 

@@ -1,50 +1,28 @@
 # DSA-IN-C
 
-A learning repository where I practice and implement Data Structures and Algorithms using C.
+This repository follows a two-layer structure:
 
-I am using C not just to solve DSA problems, but to understand what happens at a lower level — how data is stored, how memory is managed, how pointers work, and how different data structures are implemented internally.
+- ADT layer: reusable implementations under `ADT/`
+- Practice layer: numbered folders for problem-solving programs that use those ADTs
 
-## 🎯 What This Repository Contains
+## Repository structure
 
-This repository contains my implementations and practice work while learning DSA.
+- `ADT/00_Tree/` contains BST and threaded tree implementations
+- `ADT/01_Linked_List/` contains singly, doubly, circular, and sorted linked-list implementations
+- `ADT/02_Stack/` contains integer and character stacks
+- `ADT/03_Queue/` contains integer and character queues
+- `00_Tree/`, `01_Linked_List/`, `02_Stack/`, `03_Queue/`, `04_Sorting/`, `05_Recursion/`, and `06_Polynomials/` contain practice questions only
 
-The focus is on:
+## Compile a practice question with its ADT
 
-- Understanding the underlying implementation of data structures
-- Building reusable ADT templates
-- Practicing algorithms and problem-solving
-- Understanding memory, pointers, structures, and recursion in C
-- Applying data structures to solve problems
+Example:
 
-## 🧠 Learning Approach
+```bash
+gcc 02_Stack/balanced_brackets.c ADT/02_Stack/char_stack.c -o balanced_brackets
+```
 
-For each data structure, I aim to maintain:
+```bash
+gcc 00_Tree/bst_operations.c ADT/00_Tree/bst.c -o bst_operations
+```
 
-- Notes for understanding the concept
-- Reusable ADT implementations
-- Practice problems based on the data structure
-- Implementations of algorithms using that data structure
-
-The ADT templates are intended to serve as reusable building blocks while solving future DSA problems.
-
-## ⚙️ Why C?
-
-C helps me understand the lower-level working behind data structures.
-
-Instead of relying on built-in data structures, I implement them myself using:
-
-- Arrays
-- Structures
-- Pointers
-- Manual memory management
-- Function abstraction
-
-This helps me understand what is happening internally when common data structures and algorithms are used.
-
-## 🚀 Progress
-
-This repository will grow as I continue learning and implementing more DSA concepts.
-
-The goal is not just to collect solutions, but to understand the logic and implementation behind every data structure and algorithm I use.
-
-> Learning DSA by understanding what happens underneath. ⚙️
+This keeps the reusable data-structure code separate from the problem-solving logic.

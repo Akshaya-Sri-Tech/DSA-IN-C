@@ -1,4 +1,4 @@
-#include "../ADT/00_Tree/bst.h"
+#include "../ADT/04_Tree/bst.h"
 
 int main(void)
 {

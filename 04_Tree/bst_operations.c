@@ -1,6 +1,6 @@
 #include "../ADT/04_Tree/bst.h"
 
-int main(void)
+int main()
 {
     BST *root = NULL;
     int values[] = {50, 30, 70, 20, 40, 60, 80};

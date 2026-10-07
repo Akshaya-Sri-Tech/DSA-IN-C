@@ -33,7 +33,7 @@ BOOL isWReverseWForm(char str[])
     return isCharStackEmpty(s);
 }
 
-int main(void)
+int main()
 {
     char str[100];
     printf("Enter the sequence: ");

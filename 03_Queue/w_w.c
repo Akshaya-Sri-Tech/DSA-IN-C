@@ -34,7 +34,7 @@ BOOL checkWW(char s[])
     return isCharQueueEmpty(q1);
 }
 
-int main(void)
+int main()
 {
     char str[100];
     printf("Enter String (w.w): ");

@@ -16,7 +16,7 @@ void printPowerSet(int arr[], int n)
     }
 }
 
-int main(void)
+int main()
 {
     int n;
     printf("Enter n: ");

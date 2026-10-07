@@ -52,7 +52,7 @@ void printPoly(POLY pol)
     printf("\n");
 }
 
-int main(void)
+int main()
 {
     TERM t1 = {2, 12}, t2 = {3, 12}, t3 = {4, 17};
     POLY p1 = createPoly();

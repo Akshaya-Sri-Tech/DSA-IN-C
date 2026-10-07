@@ -12,7 +12,7 @@ void towerOfHanoi(int n, char source, char destination, char temp)
     towerOfHanoi(n - 1, temp, destination, source);
 }
 
-int main(void)
+int main()
 {
     int n;
     printf("Enter the number of disks: ");

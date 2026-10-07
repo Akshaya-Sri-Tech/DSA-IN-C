@@ -30,7 +30,7 @@ void insertionSortInc(int n, int A[])
     }
 }
 
-int main(void)
+int main()
 {
     int arr[] = {4, 7, 9, 2, 5, 0, 1, 7, 3, 2, 8};
     int n = sizeof(arr) / sizeof(arr[0]);

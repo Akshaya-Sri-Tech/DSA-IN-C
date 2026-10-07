@@ -63,7 +63,7 @@ BOOL checkWWWrev(char s[])
     return isCharQueueEmpty(q1) && isCharStackEmpty(s1);
 }
 
-int main(void)
+int main()
 {
     char str[100];
     printf("Enter String (w.w.w-reverse): ");

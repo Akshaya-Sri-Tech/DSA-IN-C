@@ -64,7 +64,7 @@ void postfixConversion(char expression[])
     printf("\n");
 }
 
-int main(void)
+int main()
 {
     char expression[100];
     printf("Enter expression: ");

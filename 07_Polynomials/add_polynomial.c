@@ -19,7 +19,7 @@ void display(int p[])
     printf("\n");
 }
 
-int main(void)
+int main()
 {
     int n1, n2;
     printf("Enter number of terms in first and second polynomial: ");

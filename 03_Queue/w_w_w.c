@@ -2,66 +2,64 @@
 
 BOOL checkWWW(char s[])
 {
-    CHAR_QUEUE q1;
+    CHAR_QUEUE q1, q2;
     createCharQueue(&q1);
+    createCharQueue(&q2);
 
     int i = 0;
+
     while (s[i] != '\0' && s[i] != '.')
     {
         enqueueChar(&q1, s[i]);
         i++;
     }
 
-    int check = 0;
-    if (s[i] == '.')
-    {
-        i++;
-    }
+    if (s[i] != '.')
+        return FALSE;
+
+    i++;
 
     while (s[i] != '\0' && s[i] != '.')
     {
         char x;
+
         if (!dequeueChar(&q1, &x))
-        {
             return FALSE;
-        }
-        enqueueChar(&q1, s[i]);
+
         if (x != s[i])
-        {
             return FALSE;
-        }
+
+        enqueueChar(&q2, s[i]);
         i++;
-        check = 1;
     }
 
-    if (check != 1)
-    {
+    if (!isCharQueueEmpty(q1))
         return FALSE;
-    }
 
-    if (s[i] == '.')
-    {
-        i++;
-    }
+    if (s[i] != '.')
+        return FALSE;
+
+    i++;
 
     while (s[i] != '\0' && s[i] != '\n')
     {
         char x;
-        if (!dequeueChar(&q1, &x))
-        {
+
+        if (!dequeueChar(&q2, &x))
             return FALSE;
-        }
+
         if (x != s[i])
-        {
             return FALSE;
-        }
+
         i++;
     }
 
-    return isCharQueueEmpty(q1);
+    if (!isCharQueueEmpty(q2))
+        return FALSE;
+    return TRUE;
 }
 
-int main(void)
+int main()
 {
     char str[100];
     printf("Enter String (w.w.w): ");

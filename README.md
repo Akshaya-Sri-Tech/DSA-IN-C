@@ -10,7 +10,7 @@ The focus is on understanding how **Linked Lists, Stacks, Queues, Trees, and oth
 
 I use **C++ for LeetCode and competitive programming**.
 
-**LeetCode:** https://leetcode.com/u/AkCodeZone/
+**⚙️LeetCode:** https://leetcode.com/u/AkCodeZone/
 
 ## Folder Structure
 

@@ -1,27 +1,22 @@
+
 #ifndef GRAPH_MATRIX_H
 #define GRAPH_MATRIX_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #define MAX 20
-#define INF 999999
 
-typedef struct
-{
+typedef struct {
     int n;
-    int adj[MAX][MAX];
-    int present[MAX];
-} GRAPH;
+    int cost;
+    int matrix[MAX][MAX];
+} Graph;
 
-void createGraph(GRAPH *g);
-void insert(GRAPH *g, int v);
-void addEdge(GRAPH *g, int u, int v,int weight);
-void display(GRAPH *g);
-void DFS(GRAPH *g, int start);
-void BFS(GRAPH *g, int start);
+Graph createGraph(int n);
+void addEdge(Graph *g, int u, int v);
+void display(Graph g);
+void addEdgeMST(Graph *g, int u, int v,int w);
+void DFS(Graph g, int start);
+void BFS(Graph g, int start);
 
-void prims(GRAPH *g, int start);
-void kruskals(GRAPH *g);
-
+void prims(Graph *g, int start);
+void kruskals(Graph *g);
 #endif

@@ -1,86 +1,86 @@
 #include <stdio.h>
 #include "graph_matrix.h"
 
-void prims(GRAPH *g, int start)
+#define MAX 20
+#define INF 999999
+
+void prims(Graph *g, int start)
 {
     int visited[MAX] = {0};
-    int edges = 0, cost = 0;
-
-    if (start < 0 || start >= MAX || !g->present[start])
+    int min, u, v;
+    g->cost = 0;
+    if (start < 0 || start >= g->n)
         return;
-
     visited[start] = 1;
-    printf("MATRIX Prim's MST:\n");
-
-    while (edges < g->n - 1) {
-        int min = INF, u = -1, v = -1;
-        for (int i = 0; i < MAX; i++)
+    printf("\nPrim's MST:\n");
+    for (int e = 0; e < g->n - 1; e++) {
+        min = INF;
+        u = v = -1;
+        for (int i = 0; i < g->n; i++)
             if (visited[i])
-                for (int j = 0; j < MAX; j++)
-                    if (g->present[j] && !visited[j] &&
-                        g->adj[i][j] > 0 &&
-                        g->adj[i][j] < min) {
-                        min = g->adj[i][j];
+                for (int j = 0; j < g->n; j++)
+                    if (!visited[j] && g->matrix[i][j] &&
+                        g->matrix[i][j] < min) {
+                        min = g->matrix[i][j];
                         u = i;
                         v = j;
                     }
         if (v == -1) {
             printf("Graph is disconnected.\n");
+            g->cost = 0;
             return;
         }
-
-        printf("%d - %d : %d\n", u, v, min);
         visited[v] = 1;
-        cost += min;
-        edges++;
+        g->cost += min;
+        printf("%d - %d : %d\n", u, v, min);
     }
-
-    printf("Total cost = %d\n", cost);
+    printf("Minimum Cost = %d\n", g->cost);
 }
 
-int find(int parent[], int v)
+int find(int parent[], int x)
 {
-    while (parent[v] != v)
-        v = parent[v];
-
-    return v;
+    while (parent[x] != x) {
+        parent[x] = parent[parent[x]];
+        x = parent[x];
+    }
+    return x;
 }
 
-void kruskals(GRAPH *g)
+void kruskals(Graph *g)
 {
     int parent[MAX];
-    int edges = 0, cost = 0;
-
-    for (int i = 0; i < MAX; i++)
+    int edgeCount = 0, selected = 0;
+    int u, v, min, a, b;
+    int used[MAX][MAX] = {0};
+    g->cost = 0;
+    for (int i = 0; i < g->n; i++)
         parent[i] = i;
-
-    printf("MATRIX Kruskal's MST:\n");
-
-    while (edges < g->n - 1) {
-        int min = INF, u = -1, v = -1;
-
-        for (int i = 0; i < MAX; i++)
-            if (g->present[i])
-                for (int j = i + 1; j < MAX; j++)
-                    if (g->present[j] &&
-                        g->adj[i][j] > 0 &&
-                        g->adj[i][j] < min &&
-                        find(parent, i) != find(parent, j)) {
-                        min = g->adj[i][j];
-                        u = i;
-                        v = j;
-                    }
-
+    printf("\nKruskal's MST:\n");
+    while (selected < g->n - 1) {
+        min = INF;
+        u = v = -1;
+        for (int i = 0; i < g->n; i++)
+            for (int j = i + 1; j < g->n; j++)
+                if (g->matrix[i][j] && !used[i][j] &&
+                    g->matrix[i][j] < min) {
+                    min = g->matrix[i][j];
+                    u = i;
+                    v = j;
+                }
         if (u == -1) {
             printf("Graph is disconnected.\n");
+            g->cost = 0;
             return;
         }
-
-        printf("%d - %d : %d\n", u, v, min);
-        parent[find(parent, u)] = find(parent, v);
-        cost += min;
-        edges++;
+        used[u][v] = used[v][u] = 1;
+        a = find(parent, u);
+        b = find(parent, v);
+        if (a != b) {
+            parent[a] = b;
+            g->cost += min;
+            selected++;
+            printf("%d - %d : %d\n", u, v, min);
+        }
     }
-
-    printf("Total cost = %d\n", cost);
+    printf("Minimum Cost = %d\n", g->cost);
 }

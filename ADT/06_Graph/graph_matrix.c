@@ -1,49 +1,95 @@
+
 #include <stdio.h>
+#include <stdlib.h>
 #include "graph_matrix.h"
 
-void createGraph(GRAPH *g)
+Graph createGraph(int n)
 {
-    g->n = 0;
+    Graph g;
+    g.n = n;
+    g.cost=0;
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            g.matrix[i][j] = 0;
 
-    for (int i = 0; i < MAX; i++) {
-        g->present[i] = 0;
-        for (int j = 0; j < MAX; j++)
-            g->adj[i][j] = 0;
+    return g;
+}
+
+void addEdge(Graph *g, int u, int v)
+{
+    if (u < 0 || u >= g->n ||
+        v < 0 || v >= g->n || u == v)
+        return;
+
+    g->matrix[u][v] = 1;
+    g->matrix[v][u] = 1;
+}
+
+void addEdgeMST(Graph *g, int u, int v, int w)
+{
+    if (u < 0 || u >= g->n ||
+        v < 0 || v >= g->n || u == v || w <= 0)
+        return;
+
+    g->matrix[u][v] = w;
+    g->matrix[v][u] = w;
+}
+
+void display(Graph g)
+{
+    printf("Adjacency Matrix:\n");
+
+    for (int i = 0; i < g.n; i++) {
+        for (int j = 0; j < g.n; j++)
+            printf("%3d ", g.matrix[i][j]);
+        printf("\n");
     }
 }
 
-void insert(GRAPH *g, int v)
+void DFS(Graph g, int start)
 {
-    if (v < 0 || v >= MAX || g->present[v])
+    if (start < 0 || start >= g.n)
         return;
 
-    g->present[v] = 1;
-    g->n++;
+    int visited[MAX] = {0};
+    int stack[MAX], top = -1;
+
+    stack[++top] = start;
+
+    while (top != -1) {
+        int v = stack[top--];
+
+        if (visited[v])
+            continue;
+
+        visited[v] = 1;
+        printf("%d ", v);
+
+        for (int i = g.n - 1; i >= 0; i--)
+            if (g.matrix[v][i] && !visited[i])
+                stack[++top] = i;
+    }
 }
 
-void addEdge(GRAPH *g, int u, int v, int weight)
+void BFS(Graph g, int start)
 {
-    if (u < 0 || u >= MAX || v < 0 || v >= MAX)
+    if (start < 0 || start >= g.n)
         return;
 
-    if (!g->present[u] || !g->present[v] ||
-        u == v || weight <= 0)
-        return;
+    int visited[MAX] = {0};
+    int queue[MAX], front = 0, rear = 0;
 
-    g->adj[u][v] = weight;
-    g->adj[v][u] = weight;
-}
+    queue[rear++] = start;
+    visited[start] = 1;
 
-void display(GRAPH *g)
-{
-    for (int i = 0; i < MAX; i++)
-        if (g->present[i]) {
-            printf("%d: ", i);
+    while (front < rear) {
+        int v = queue[front++];
+        printf("%d ", v);
 
-            for (int j = 0; j < MAX; j++)
-                if (g->adj[i][j])
-                    printf("(%d, w=%d) ", j, g->adj[i][j]);
-
-            printf("\n");
-        }
+        for (int i = 0; i < g.n; i++)
+            if (g.matrix[v][i] && !visited[i]) {
+                visited[i] = 1;
+                queue[rear++] = i;
+            }
+    }
 }

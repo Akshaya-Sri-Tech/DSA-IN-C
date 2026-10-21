@@ -14,7 +14,7 @@ Graph createGraph(int n);
 void addEdge(Graph *g, int u, int v);
 void display(Graph g);
 void addEdgeMST(Graph *g, int u, int v,int w);
-void DFS(Graph g, int start);
+void DFS(Graph g, int start,int visited[]);
 void BFS(Graph g, int start);
 
 void prims(Graph *g, int start);

@@ -45,30 +45,34 @@ void display(Graph g)
         printf("\n");
     }
 }
-
+/*
 void DFS(Graph g, int start)
 {
     if (start < 0 || start >= g.n)
         return;
-
     int visited[MAX] = {0};
     int stack[MAX], top = -1;
-
     stack[++top] = start;
-
     while (top != -1) {
         int v = stack[top--];
-
         if (visited[v])
             continue;
-
         visited[v] = 1;
         printf("%d ", v);
-
         for (int i = g.n - 1; i >= 0; i--)
             if (g.matrix[v][i] && !visited[i])
                 stack[++top] = i;
     }
+}
+*/
+void DFS(Graph g, int start, int visited[])
+{
+    visited[start] = 1;
+    printf("%d ", start);
+
+    for (int i = 0; i < g.n; i++)
+        if (g.matrix[start][i] && !visited[i])
+            DFS(g, i, visited);
 }
 
 void BFS(Graph g, int start)

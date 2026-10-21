@@ -4,16 +4,15 @@
 
 void DFS_mat(int n, int g[n][n], int v, int visited[MAX], int k)
 {
-    if (k == -1) return;
+    if (k < 0) return;
 
     printf("%2d", v);
     visited[v] = 1;
 
-    for (int i = 0; i < MAX; i++)
+    for (int i = 0; i < n; i++)
     {
         if (g[v][i] == 1 && visited[i] == 0)
         {
-            visited[i] = 1;
             DFS_mat(n, g, i, visited, k - 1);
         }
     }

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "graph_matrix.h"
 
-int main(void)
+int main()
 {
     Graph g1 = createGraph(5);
 
@@ -10,9 +10,9 @@ int main(void)
     addEdge(&g1, 0, 4);
     addEdge(&g1, 1, 2);
 
-
+    int visited[MAX]={0};
     printf("DFS: ");
-    DFS(g1, 0);
+    DFS(g1, 0, visited);
 
     printf("\nBFS: ");
     BFS(g1, 0);
